@@ -6,13 +6,14 @@ import org.graphwalker.core.generator.RandomPath;
 import org.graphwalker.core.machine.ExecutionContext;
 import org.graphwalker.core.model.Edge;
 import org.graphwalker.java.test.TestBuilder;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +21,12 @@ import java.nio.file.Paths;
 public class CreateUserTest extends ExecutionContext implements CreateUserModel{
 	public final static Path MODEL_PATH = Paths.get("com/company/CreateUserModel.json");
     public WebDriver driver = new FirefoxDriver();
+    
+    @BeforeTest
+    public void setUp() {
+    	System.out.println("setup");
+    	System.setProperty("Webdriver.firefox.driver", "D:\\selenium webdriver\\geckodriver-v0.32.2-win64\\geckodriver.exe");
+    }
     
     @Override
     public void e_InputCorrectCredentials() {
@@ -74,7 +81,6 @@ public class CreateUserTest extends ExecutionContext implements CreateUserModel{
     @Override
     public void e_OpenLoginPage() {
     	System.out.println("e_OpenLoginPage");
-    	System.setProperty("Webdriver.firefox.driver", "D:\\selenium webdriver\\geckodriver-v0.32.2-win64\\geckodriver.exe");
 		driver.get("http://127.0.0.1:8000/");
 		System.out.println(driver.getTitle());
     }
